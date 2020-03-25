@@ -1,0 +1,41 @@
+<div class="example-container mat-elevation-z8">
+  <table *ngIf="emails?.length" mat-table [dataSource]="emails" class="inbox-container ">
+    <!-- sender Column -->
+  <ng-container matColumnDef="sender" >
+    <th mat-header-cell *matHeaderCellDef> Gönderen </th>
+     <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.isRead? '' : '#d3d3d3'}" >{{element.sender}}</td>
+  </ng-container>
+
+  
+    <!-- body Column -->
+  <ng-container matColumnDef="body">
+    <th mat-header-cell *matHeaderCellDef> Mail İçeriği </th>
+    <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.isRead? '' : '#d3d3d3'}" >{{element.body.slice(0,20)}}</td>
+  </ng-container>
+    <!-- subject Column -->
+  <ng-container matColumnDef="subject">
+    <th mat-header-cell *matHeaderCellDef> Konu </th>
+    <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.isRead? '' : '#d3d3d3'}" >{{element.subject}}</td>
+  </ng-container>
+
+   <!-- date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Tarih </th>
+    <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.isRead? '' : '#d3d3d3'}" >{{element.date | date}}</td>
+  </ng-container>
+
+ 
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row [routerLink]="['/inbox', row.id]" *matRowDef="let row; columns: displayedColumns;"></tr>
+ 
+</table>
+
+<h3 *ngIf="!emails?.length">Mail bulunamamıştır.</h3>
+
+
+
+
+</div>
+
+
